@@ -1,4 +1,5 @@
 import com.github.javafaker.Faker;
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -21,7 +22,7 @@ public class WebDriverSettings {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver/chromedriver");
+        ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();

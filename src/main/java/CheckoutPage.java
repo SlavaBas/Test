@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import java.time.Duration;
 
 public class CheckoutPage {
@@ -47,9 +48,6 @@ public class CheckoutPage {
     final By selectCardNumberFrame = By.xpath("(//iframe[contains(@name,'_privateStripeFrame')])[2]");
     final By selectCVCFrame = By.xpath("(//iframe[contains(@name,'_privateStripeFrame')])[3]");
     final By successfullMessage = By.xpath("//h3[text()='Payment Successful']");
-
-
-
 
 
     public CheckoutPage checkText() {
@@ -159,8 +157,9 @@ public class CheckoutPage {
         }
         return this;
     }
-    public CheckoutPage fileUpload(String filepath){
-        if(driver.findElement(uploadField).isDisplayed()) {
+
+    public CheckoutPage fileUpload(String filepath) {
+        if (driver.findElement(uploadField).isDisplayed()) {
             driver.findElement(uploadField).sendKeys(filepath);
         }
         return this;
@@ -170,25 +169,27 @@ public class CheckoutPage {
         driver.findElement(checkMeButton).click();
         return this;
     }
-    public CheckoutPage inputInsetance(){
+
+    public CheckoutPage inputInsetance() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.presenceOfElementLocated(inputInsuranceField));
         driver.findElement(inputInsuranceField).sendKeys("345351120");
         return this;
     }
 
-    public CheckoutPage confirmInsuranceButton(){
+    public CheckoutPage confirmInsuranceButton() {
         driver.findElement(confirmInsuranceButton).click();
         return this;
     }
-    public CheckoutPage nextStepButton(){
+
+    public CheckoutPage nextStepButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.presenceOfElementLocated(nextStepButton));
         driver.findElement(nextStepButton).click();
         return this;
     }
 
-    public CheckoutPage selectInsuranceCheckbox(){
+    public CheckoutPage selectInsuranceCheckbox() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.presenceOfElementLocated(insuranceCheckbox));
         while (!driver.findElement(insuranceCheckbox).isSelected()) {
@@ -207,7 +208,7 @@ public class CheckoutPage {
         return this;
     }
 
-    public CheckoutPage inputCardNumber(String text){
+    public CheckoutPage inputCardNumber(String text) {
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(cardNumberField));
         driver.findElement(cardNumberField).sendKeys(text);
@@ -220,21 +221,25 @@ public class CheckoutPage {
         driver.switchTo().frame(driver.findElement(selectCardNumberFrame));
         return this;
     }
-    public CheckoutPage inputDateExiry(String text){
+
+    public CheckoutPage inputDateExiry(String text) {
         driver.findElement(expiryDateField).sendKeys(text);
         return this;
     }
+
     public CheckoutPage switchToFrameCVC() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.presenceOfElementLocated(selectCVCFrame));
         driver.switchTo().frame(driver.findElement(selectCVCFrame));
         return this;
     }
-    public CheckoutPage inputCVC(String text){
+
+    public CheckoutPage inputCVC(String text) {
         driver.findElement(cvcField).sendKeys(text);
         return this;
     }
-    public CheckoutPage selectSubscriptionCheckbox(){
+
+    public CheckoutPage selectSubscriptionCheckbox() {
         while (!driver.findElement(subscriptionCheckbox).isSelected()) {
             driver.findElement(subscriptionCheckbox).click();
             if (!driver.findElement(subscriptionCheckbox).isSelected()) {
@@ -243,10 +248,12 @@ public class CheckoutPage {
         }
         return this;
     }
+
     public CheckoutPage clickSelectHowDidYouHer() {
         driver.findElement(howDidYouHearAboutUsField).click();
         return this;
     }
+
     public CheckoutPage clickSelectFacebook() {
         WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(20)));
         wait.until(ExpectedConditions.presenceOfElementLocated(selectFacebook));
@@ -254,10 +261,12 @@ public class CheckoutPage {
 
         return this;
     }
+
     public CheckoutPage clickSelectLeaseOrPurchase() {
         driver.findElement(leaseOrPurchaseField).click();
         return this;
     }
+
     public CheckoutPage clickSelectLease() {
 
         WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(20)));
@@ -265,13 +274,15 @@ public class CheckoutPage {
         driver.findElement(selectLease).click();
         return this;
     }
+
     public CheckoutPage clickPayButtom() {
         WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(20)));
         wait.until(ExpectedConditions.presenceOfElementLocated(payButton));
         driver.findElement(payButton).click();
         return this;
     }
-    public CheckoutPage successfullMessage(){
+
+    public CheckoutPage successfullMessage() {
         WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(30)));
         wait.until(ExpectedConditions.presenceOfElementLocated(successfullMessage));
         return this;
