@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CarByZIPPage {
+public class CarByZIPPage extends Settings{
     WebDriver driver;
 
     public CarByZIPPage(WebDriver driver) {
@@ -17,9 +17,7 @@ public class CarByZIPPage {
     final By selectedCar = By.xpath("//a//h4[@title='2022 Nissan  Altima']");
 
     public CarByZIPPage checkText(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.presenceOfElementLocated(locationText));
-
+        presenceOfElementLocated(driver, locationText);
         return this;
     }
 

@@ -1,14 +1,13 @@
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class SelectedCarPage {
+public class SelectedCarPage extends Settings{
     WebDriver driver;
 
     public SelectedCarPage(WebDriver driver) {
@@ -21,15 +20,7 @@ public class SelectedCarPage {
 
 
     public SelectedCarPage checkPreloaderInvisible() {
-        WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(10)));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(preloader));
-        return this;
-    }
-
-    public SelectedCarPage selectAgeRange() {
-
-        Select selectObject = new Select(driver.findElement(selectAgeRangeField));
-        selectObject.selectByIndex(2);
+        invisibilityOfElementLocated(driver, preloader);
         return this;
     }
 
@@ -40,15 +31,13 @@ public class SelectedCarPage {
     }
 
     public SelectedCarPage clickSelectAge() {
-        WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(20)));
-        wait.until(ExpectedConditions.presenceOfElementLocated(selectAge));
+        presenceOfElementLocated(driver, selectAge);
         driver.findElement(selectAge).click();
         return this;
     }
 
     public CheckoutPage clickApplyCar() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("document.getElementsByClassName('MuiButton-root')[0].click()");
+        javascriptExecutor(driver, "document.getElementsByClassName('MuiButton-root')[0].click()");
         return new CheckoutPage(driver);
     }
 }

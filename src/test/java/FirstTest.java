@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class FirstTest extends WebDriverSettings{
 
     @Test
-    public void Test(){
+    public void RentCarWithoutFlorida(){
 
         mainPage.clickSelectVehicle();
         vehiclePage.inputZIPCode("19044")
@@ -34,7 +34,7 @@ public class FirstTest extends WebDriverSettings{
                 .selectConsumerCheckbox()
                 .selectFairCheckbox()
                 .clickCheckMeButton()
-                .inputInsetance()
+                .inputInsetance("345351120")
                 .confirmInsuranceButton()
                 .nextStepButton()
                 .selectInsuranceCheckbox()
@@ -58,6 +58,47 @@ public class FirstTest extends WebDriverSettings{
 
 
        // /Users/jigado/Documents/Java/JavaSelenium/files/file.jpg
+    }
+    @Test
+    public void RentCarFlorida() {
+
+        mainPage.clickSelectVehicle();
+        vehiclePage.inputZIPCode("33014")
+                .clickFindCar();
+        carByZIPPage.checkText();
+        String text = driver.findElement(By.xpath("//h4[text()='Location']")).getText();
+        Assert.assertEquals("Location", text);
+        carByZIPPage.clickSelectCar();
+        selectedCarPage.checkPreloaderInvisible()
+                .clickSelectAgeRange()
+                .clickSelectAge()
+                .clickApplyCar();
+        checkoutPage.checkText()
+                .inputFirstName(faker.name().firstName())
+                .inputLastName(faker.name().lastName())
+                .inputEmail(faker.internet().emailAddress())
+                .inputPhone(faker.phoneNumber().phoneNumber())
+                .clickVerifyMeButton()
+                .switchToFrame()
+                .clickAcceptIdentityButton()
+                .clickContinueButton()
+                .switchToDefaultContent()
+                .selectChangeAreaRadioButton()
+                .inputAddress("Severity street")
+                .inputCity("Alabama")
+                .inputApartment("45")
+                .selectState("Florida")
+                .inputZIP("33014")
+                .uploadDocuments("/Users/jigado/Documents/Java/JavaSeleniumUI/files/file.pdf")
+                .goToSecondStep()
+                .inputGrossIncome("555555")
+                .selectPrivacyPolicyCheckbox()
+                .selectConsumerCheckbox()
+                .selectFairCheckbox()
+                .clickCheckMeButton()
+                .inputInsetance("345351120")
+                .confirmInsuranceButton()
+                .nextStepButton();
     }
 
 }

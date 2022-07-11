@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class VehiclePage {
+public class VehiclePage extends Settings{
     WebDriver driver;
 
     public VehiclePage(WebDriver driver) {
@@ -18,15 +18,13 @@ public class VehiclePage {
 
 
     public VehiclePage inputZIPCode(String zipcode){
-        WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(20)));
-        wait.until(ExpectedConditions.presenceOfElementLocated(ZIPCodeField));
+        presenceOfElementLocated(driver, ZIPCodeField);
         driver.findElement(ZIPCodeField).sendKeys(zipcode);
         return this;
     }
 
     public CarByZIPPage clickFindCar(){
-        WebDriverWait wait = (new WebDriverWait(driver, Duration.ofSeconds(20)));
-        wait.until(ExpectedConditions.elementToBeClickable(findVehicleButton));
+        presenceOfElementLocated(driver, findVehicleButton);
         driver.findElement(findVehicleButton).click();
         return new CarByZIPPage(driver);
     }
