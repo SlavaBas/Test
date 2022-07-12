@@ -1,11 +1,5 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class SelectedCarPage extends Settings{
     WebDriver driver;
@@ -20,7 +14,7 @@ public class SelectedCarPage extends Settings{
 
 
     public SelectedCarPage checkPreloaderInvisible() {
-        invisibilityOfElementLocated(driver, preloader);
+        waitInvisibilityOfElementLocated(driver, preloader);
         return this;
     }
 
@@ -31,7 +25,7 @@ public class SelectedCarPage extends Settings{
     }
 
     public SelectedCarPage clickSelectAge() {
-        presenceOfElementLocated(driver, selectAge);
+        waitPresenceOfElementLocated(driver, selectAge);
         driver.findElement(selectAge).click();
         return this;
     }

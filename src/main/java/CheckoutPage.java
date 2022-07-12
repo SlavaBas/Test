@@ -1,9 +1,4 @@
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-
-import java.time.Duration;
 
 public class CheckoutPage extends Settings {
     WebDriver driver;
@@ -55,6 +50,47 @@ public class CheckoutPage extends Settings {
     final By uploadRButton = By.xpath("//div[contains(@class,'upload_wrapper')]//button");
     final By removeUploadedFile = By.xpath("//a[contains(@class,'style_remove_button')]");
     final By goToSecondStepButton = By.xpath("//div[contains(@class,'form_submit_box')]//button");
+    final By addPersonalInsurance = By.xpath("//h4[text()='add Personal insurance']");
+    final By insuranceCarrierField = By.id("textfield-insuranceCareer");
+    final By agentPhoneNumberField = By.xpath("//input[@class='input_default' and @inputmode='numeric'] ");
+    final By policyNumberField = By.id("textfield-insurancePolicyNumber");
+    final By policyNumberExpirationDateField = By.id("textfield-insuranceExpirationDate");
+    final By goToFourStepButton = By.xpath("//button[contains(@class, 'Button-root') and @type='submit']");
+
+
+
+    public CheckoutPage addPersonalInsurance(){
+        waitPresenceOfElementLocated(driver, addPersonalInsurance);
+        javascriptExecutorScrollIntoView(driver, addPersonalInsurance);
+        driver.findElement(addPersonalInsurance).click();
+        return this;
+    }
+
+    public CheckoutPage inputInsuranceCarrier(String text){
+        driver.findElement(insuranceCarrierField).sendKeys(text);
+        return this;
+    }
+
+    public CheckoutPage inputAgentPhoneNumber(String text){
+        driver.findElement(agentPhoneNumberField).sendKeys(text);
+        return this;
+    }
+
+    public CheckoutPage inputPolicyNumberExpirationDate(String text){
+        driver.findElement(policyNumberExpirationDateField).sendKeys(text);
+        return this;
+    }
+
+    public CheckoutPage inputPolicyNumber(String text){
+        driver.findElement(policyNumberField).sendKeys(text);
+        return this;
+    }
+
+    public CheckoutPage goToFourStep(){
+        driver.findElement(goToFourStepButton).click();
+        return this;
+    }
+
 
     public CheckoutPage goToSecondStep() {
         driver.findElement(goToSecondStepButton).click();
@@ -63,7 +99,7 @@ public class CheckoutPage extends Settings {
 
     public CheckoutPage uploadDocuments(String path) {
         uploadFiles(driver, uploadResidencyDocuments, path);
-        presenceOfElementLocated(driver, removeUploadedFile);
+        waitPresenceOfElementLocated(driver, removeUploadedFile);
         return this;
     }
 
@@ -83,7 +119,7 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage inputAddress(String address) {
-        presenceOfElementLocated(driver, inputAddressField);
+        waitPresenceOfElementLocated(driver, inputAddressField);
         driver.findElement(inputAddressField).sendKeys(address);
         return this;
     }
@@ -94,7 +130,7 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage selectState(String state) {
-        presenceOfElementLocated(driver, inputStateField);
+        waitPresenceOfElementLocated(driver, inputStateField);
         String id = driver.findElement(inputStateField).getAttribute("id");
         javascriptExecutor(driver, "document.getElementById('" + id + "').value = '" + state + "'");
         driver.findElement(inputStateField).sendKeys(state);
@@ -105,7 +141,7 @@ public class CheckoutPage extends Settings {
 
 
     public CheckoutPage checkText() {
-        presenceOfElementLocated(driver, verifyIdentityText);
+        waitPresenceOfElementLocated(driver, verifyIdentityText);
         return this;
     }
 
@@ -135,21 +171,21 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage switchToFrame() {
-        presenceOfElementLocated(driver, iframePrivateStripeFrame);
+        waitPresenceOfElementLocated(driver, iframePrivateStripeFrame);
         driver.switchTo().frame(driver.findElement(iframePrivateStripeFrame));
-        presenceOfElementLocated(driver, iframeLightboxApp);
+        waitPresenceOfElementLocated(driver, iframeLightboxApp);
         driver.switchTo().frame(driver.findElement(iframeLightboxApp));
         return this;
     }
 
     public CheckoutPage clickAcceptIdentityButton() {
-        presenceOfElementLocated(driver, submitButton);
+        waitPresenceOfElementLocated(driver, submitButton);
         driver.findElement(submitButton).click();
         return this;
     }
 
     public CheckoutPage clickContinueButton() {
-        presenceOfElementLocated(driver, continueButton);
+        waitPresenceOfElementLocated(driver, continueButton);
         driver.findElement(continueButton).click();
         return this;
     }
@@ -160,19 +196,19 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage clickConfirmAddressButton() {
-        presenceOfElementLocated(driver, confirmAddressButton);
+        waitPresenceOfElementLocated(driver, confirmAddressButton);
         driver.findElement(confirmAddressButton).click();
         return this;
     }
 
     public CheckoutPage inputGrossIncome(String gross) {
-        presenceOfElementLocated(driver, grossIncomeField);
+        waitPresenceOfElementLocated(driver, grossIncomeField);
         driver.findElement(grossIncomeField).sendKeys(gross);
         return this;
     }
 
     public CheckoutPage selectPrivacyPolicyCheckbox() {
-        javascriptExecutorScroll(driver, privacyPolicyCheckbox);
+        javascriptExecutorScrollIntoView(driver, privacyPolicyCheckbox);
         selectCheckbox(driver, privacyPolicyCheckbox);
         return this;
     }
@@ -194,7 +230,7 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage inputInsetance(String text) {
-        presenceOfElementLocated(driver, inputInsuranceField);
+        waitPresenceOfElementLocated(driver, inputInsuranceField);
         driver.findElement(inputInsuranceField).sendKeys(text);
         return this;
     }
@@ -205,32 +241,32 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage nextStepButton() {
-        presenceOfElementLocated(driver, nextStepButton);
+        waitPresenceOfElementLocated(driver, nextStepButton);
         driver.findElement(nextStepButton).click();
         return this;
     }
 
     public CheckoutPage selectInsuranceCheckbox() {
-        presenceOfElementLocated(driver, insuranceCheckbox);
+        waitPresenceOfElementLocated(driver, insuranceCheckbox);
         selectCheckbox(driver, insuranceCheckbox);
 
         return this;
     }
 
     public CheckoutPage switchToFrameCardNumber() {
-        presenceOfElementLocated(driver, selectPaymentFrame);
+        waitPresenceOfElementLocated(driver, selectPaymentFrame);
         driver.switchTo().frame(driver.findElement(selectPaymentFrame));
         return this;
     }
 
     public CheckoutPage inputCardNumber(String text) {
-        javascriptExecutorScroll(driver, cardNumberField);
+        javascriptExecutorScrollIntoView(driver, cardNumberField);
         driver.findElement(cardNumberField).sendKeys(text);
         return this;
     }
 
     public CheckoutPage switchToFrameDateExpiry() {
-        presenceOfElementLocated(driver, selectCardNumberFrame);
+        waitPresenceOfElementLocated(driver, selectCardNumberFrame);
         driver.switchTo().frame(driver.findElement(selectCardNumberFrame));
         return this;
     }
@@ -241,7 +277,7 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage switchToFrameCVC() {
-        presenceOfElementLocated(driver, selectCVCFrame);
+        waitPresenceOfElementLocated(driver, selectCVCFrame);
         driver.switchTo().frame(driver.findElement(selectCVCFrame));
         return this;
     }
@@ -262,7 +298,7 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage clickSelectFacebook() {
-        presenceOfElementLocated(driver, selectFacebook);
+        waitPresenceOfElementLocated(driver, selectFacebook);
         driver.findElement(selectFacebook).click();
 
         return this;
@@ -274,19 +310,19 @@ public class CheckoutPage extends Settings {
     }
 
     public CheckoutPage clickSelectLease() {
-        presenceOfElementLocated(driver, selectLease);
+        waitPresenceOfElementLocated(driver, selectLease);
         driver.findElement(selectLease).click();
         return this;
     }
 
     public CheckoutPage clickPayButtom() {
-        presenceOfElementLocated(driver, payButton);
+        waitPresenceOfElementLocated(driver, payButton);
         driver.findElement(payButton).click();
         return this;
     }
 
     public CheckoutPage successfullMessage() {
-        presenceOfElementLocated(driver, successfullMessage);
+        waitPresenceOfElementLocated(driver, successfullMessage);
         return this;
 
     }

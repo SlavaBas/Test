@@ -98,7 +98,30 @@ public class FirstTest extends WebDriverSettings{
                 .clickCheckMeButton()
                 .inputInsetance("345351120")
                 .confirmInsuranceButton()
-                .nextStepButton();
+                .nextStepButton()
+                .addPersonalInsurance()
+                .inputInsuranceCarrier("64564564")
+                .inputAgentPhoneNumber(faker.phoneNumber().phoneNumber())
+                .inputPolicyNumber("45645645")
+                .inputPolicyNumberExpirationDate("12122033")
+                .uploadDocuments("/Users/jigado/Documents/Java/JavaSeleniumUI/files/file.pdf")
+                .goToFourStep()
+                .switchToFrameCardNumber()
+                .inputCardNumber("4242424242424242")
+                .switchToDefaultContent()
+                .switchToFrameDateExpiry()
+                .inputDateExiry("1233")
+                .switchToDefaultContent()
+                .switchToFrameCVC()
+                .inputCVC("333")
+                .switchToDefaultContent()
+                .selectSubscriptionCheckbox()
+                .clickSelectHowDidYouHer()
+                .clickSelectFacebook()
+                .clickSelectLeaseOrPurchase()
+                .clickSelectLease()
+                .clickPayButtom()
+                .successfullMessage();
     }
 
 }
