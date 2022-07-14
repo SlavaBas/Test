@@ -6,7 +6,7 @@ public class FirstTest extends WebDriverSettings{
 
     @Test
     public void RentCarWithoutFlorida(){
-
+        String phone = faker.phoneNumber().phoneNumber();
         mainPage.clickSelectVehicle();
         vehiclePage.inputZIPCode("19044")
                 .clickFindCar();
@@ -22,9 +22,9 @@ public class FirstTest extends WebDriverSettings{
                 .inputFirstName(faker.name().firstName())
                 .inputLastName(faker.name().lastName())
                 .inputEmail(faker.internet().emailAddress())
-                .inputPhone(faker.phoneNumber().phoneNumber())
+                .inputPhone(phone)
                 .clickVerifyMeButton()
-                .switchToFrame()
+                .switchToFrameConfirmDocuments()
                 .clickAcceptIdentityButton()
                 .clickContinueButton()
                 .switchToDefaultContent()
@@ -56,12 +56,10 @@ public class FirstTest extends WebDriverSettings{
                 .clickPayButtom()
                 .successfullMessage();
 
-
-       // /Users/jigado/Documents/Java/JavaSelenium/files/file.jpg
     }
     @Test
     public void RentCarFlorida() {
-
+        String phone = faker.phoneNumber().phoneNumber();
         mainPage.clickSelectVehicle();
         vehiclePage.inputZIPCode("33014")
                 .clickFindCar();
@@ -77,9 +75,9 @@ public class FirstTest extends WebDriverSettings{
                 .inputFirstName(faker.name().firstName())
                 .inputLastName(faker.name().lastName())
                 .inputEmail(faker.internet().emailAddress())
-                .inputPhone(faker.phoneNumber().phoneNumber())
+                .inputPhone(phone)
                 .clickVerifyMeButton()
-                .switchToFrame()
+                .switchToFrameConfirmDocuments()
                 .clickAcceptIdentityButton()
                 .clickContinueButton()
                 .switchToDefaultContent()
@@ -101,7 +99,7 @@ public class FirstTest extends WebDriverSettings{
                 .nextStepButton()
                 .addPersonalInsurance()
                 .inputInsuranceCarrier("64564564")
-                .inputAgentPhoneNumber(faker.phoneNumber().phoneNumber())
+                .inputAgentPhoneNumber(phone)
                 .inputPolicyNumber("45645645")
                 .inputPolicyNumberExpirationDate("12122033")
                 .uploadDocuments("/Users/jigado/Documents/Java/JavaSeleniumUI/files/file.pdf")

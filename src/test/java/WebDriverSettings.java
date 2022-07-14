@@ -2,7 +2,10 @@ import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
@@ -18,19 +21,24 @@ public class WebDriverSettings {
     public static CarByZIPPage carByZIPPage;
     public static SelectedCarPage selectedCarPage;
     public static CheckoutPage checkoutPage;
+    public static Settings settings;
 
 
     @BeforeClass
     public void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless", "--window-size=1920,1200");
+
         ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
     }
 
-        @BeforeMethod
-        public void start(){
+    @BeforeMethod
+    public void start() {
         driver.get("https://dev-app.drivego.com/");
 
         String title = driver.getTitle();
@@ -42,13 +50,18 @@ public class WebDriverSettings {
         carByZIPPage = new CarByZIPPage(driver);
         selectedCarPage = new SelectedCarPage(driver);
         checkoutPage = new CheckoutPage(driver);
-
+        settings = new Settings(driver);
 
     }
 
-//    @AfterMethod
-//    public void close() {
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void close() {
+        driver.close();
+    }
+
+    @AfterClass
+    public void quit() {
+        driver.quit();
+    }
 
 }

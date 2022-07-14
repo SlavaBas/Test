@@ -1,10 +1,9 @@
 import org.openqa.selenium.*;
 
 public class CheckoutPage extends Settings {
-    WebDriver driver;
 
     public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     final By verifyIdentityText = By.xpath("//h4[text()='Verify your identity']");
@@ -48,281 +47,287 @@ public class CheckoutPage extends Settings {
     final By inputZIPField = By.xpath("//input[@placeholder='Zipcode']");
     final By uploadResidencyDocuments = By.xpath("//input[contains(@id,'fileUploader-document')]");
     final By uploadRButton = By.xpath("//div[contains(@class,'upload_wrapper')]//button");
-    final By removeUploadedFile = By.xpath("//a[contains(@class,'style_remove_button')]");
+    final By removeUploadedFileButton = By.xpath("//a[contains(@class,'style_remove_button')]");
     final By goToSecondStepButton = By.xpath("//div[contains(@class,'form_submit_box')]//button");
     final By addPersonalInsurance = By.xpath("//h4[text()='add Personal insurance']");
     final By insuranceCarrierField = By.id("textfield-insuranceCareer");
     final By agentPhoneNumberField = By.xpath("//input[@class='input_default' and @inputmode='numeric'] ");
-    final By policyNumberField = By.id("textfield-insurancePolicyNumber");
-    final By policyNumberExpirationDateField = By.id("textfield-insuranceExpirationDate");
+    final By policyNumberField = By.name("insurancePolicyNumber");
+    final By policyNumberExpirationDateField = By.name("insuranceExpirationDate");
     final By goToFourStepButton = By.xpath("//button[contains(@class, 'Button-root') and @type='submit']");
 
 
 
-    public CheckoutPage addPersonalInsurance(){
-        waitPresenceOfElementLocated(driver, addPersonalInsurance);
-        javascriptExecutorScrollIntoView(driver, addPersonalInsurance);
-        driver.findElement(addPersonalInsurance).click();
+
+    public CheckoutPage addPersonalInsurance() {
+        waitPresenceOfElementLocated(addPersonalInsurance);
+        javascriptExecutorScrollIntoView(addPersonalInsurance);
+        click(addPersonalInsurance);
         return this;
     }
 
-    public CheckoutPage inputInsuranceCarrier(String text){
-        driver.findElement(insuranceCarrierField).sendKeys(text);
+    public CheckoutPage inputInsuranceCarrier(String text) {
+        sendKeys(insuranceCarrierField, text);
         return this;
     }
 
-    public CheckoutPage inputAgentPhoneNumber(String text){
-        driver.findElement(agentPhoneNumberField).sendKeys(text);
+    public CheckoutPage inputAgentPhoneNumber(String text) {
+        click(agentPhoneNumberField);
+        sendKeys(agentPhoneNumberField, text);
+
         return this;
     }
 
-    public CheckoutPage inputPolicyNumberExpirationDate(String text){
-        driver.findElement(policyNumberExpirationDateField).sendKeys(text);
+    public CheckoutPage inputPolicyNumberExpirationDate(String text) {
+        sendKeys(policyNumberExpirationDateField, text);
         return this;
     }
 
-    public CheckoutPage inputPolicyNumber(String text){
-        driver.findElement(policyNumberField).sendKeys(text);
+    public CheckoutPage inputPolicyNumber(String text) {
+        sendKeys(policyNumberField, text);
         return this;
     }
 
-    public CheckoutPage goToFourStep(){
-        driver.findElement(goToFourStepButton).click();
+    public CheckoutPage goToFourStep() {
+        javascriptExecutorScrollIntoView(goToFourStepButton);
+        click(goToFourStepButton);
         return this;
     }
 
 
     public CheckoutPage goToSecondStep() {
-        driver.findElement(goToSecondStepButton).click();
+        click(goToSecondStepButton);
         return this;
     }
 
     public CheckoutPage uploadDocuments(String path) {
-        uploadFiles(driver, uploadResidencyDocuments, path);
-        waitPresenceOfElementLocated(driver, removeUploadedFile);
+        javascriptExecutorScrollIntoView(uploadResidencyDocuments);
+        uploadFiles(uploadResidencyDocuments, path);
+        waitPresenceOfElementLocated(removeUploadedFileButton);
         return this;
     }
 
     public CheckoutPage inputZIP(String apartment) {
-        driver.findElement(inputZIPField).sendKeys(apartment);
+        sendKeys(inputZIPField, apartment);
         return this;
     }
 
     public CheckoutPage inputApartment(String apartment) {
-        driver.findElement(inputApartmentField).sendKeys(apartment);
+        sendKeys(inputApartmentField, apartment);
         return this;
     }
 
     public CheckoutPage inputCity(String city) {
-        driver.findElement(inputCityField).sendKeys(city);
+        sendKeys(inputCityField, city);
         return this;
     }
 
     public CheckoutPage inputAddress(String address) {
-        waitPresenceOfElementLocated(driver, inputAddressField);
-        driver.findElement(inputAddressField).sendKeys(address);
+        waitPresenceOfElementLocated(inputAddressField);
+        sendKeys(inputAddressField, address);
         return this;
     }
 
     public CheckoutPage selectChangeAreaRadioButton() {
-        driver.findElement(changeAreaRadioButton).click();
+        click(changeAreaRadioButton);
         return this;
     }
 
     public CheckoutPage selectState(String state) {
-        waitPresenceOfElementLocated(driver, inputStateField);
-        String id = driver.findElement(inputStateField).getAttribute("id");
-        javascriptExecutor(driver, "document.getElementById('" + id + "').value = '" + state + "'");
-        driver.findElement(inputStateField).sendKeys(state);
-        driver.findElement(inputStateField).sendKeys(Keys.ARROW_DOWN);
-        driver.findElement(inputStateField).sendKeys(Keys.ENTER);
+        waitPresenceOfElementLocated(inputStateField);
+        String id = getAttribute(inputStateField, "id");
+        javascriptExecutor("document.getElementById('" + id + "').value = '" + state + "'");
+        sendKeys(inputStateField, state);
+        sendKeysKeyboardInput(inputStateField, Keys.ARROW_DOWN);
+        sendKeysKeyboardInput(inputStateField, Keys.ENTER);
         return this;
     }
 
 
     public CheckoutPage checkText() {
-        waitPresenceOfElementLocated(driver, verifyIdentityText);
+        waitPresenceOfElementLocated(verifyIdentityText);
         return this;
     }
 
     public CheckoutPage inputFirstName(String firstname) {
-        driver.findElement(firstNameField).sendKeys(firstname);
+        sendKeys(firstNameField, firstname);
         return this;
     }
 
     public CheckoutPage inputLastName(String lastname) {
-        driver.findElement(lastNameField).sendKeys(lastname);
+        sendKeys(lastNameField, lastname);
         return this;
     }
 
     public CheckoutPage inputEmail(String email) {
-        driver.findElement(emailField).sendKeys(email);
+        sendKeys(emailField, email);
         return this;
     }
 
     public CheckoutPage inputPhone(String phone) {
-        driver.findElement(phoneField).sendKeys(phone);
+        click(phoneField);
+        sendKeys(phoneField, phone);
         return this;
     }
 
     public CheckoutPage clickVerifyMeButton() {
-        javascriptExecutor(driver, "document.getElementsByClassName('MuiButton-root')[0].click()");
+        javascriptExecutor("document.getElementsByClassName('MuiButton-root')[0].click()");
         return this;
     }
 
-    public CheckoutPage switchToFrame() {
-        waitPresenceOfElementLocated(driver, iframePrivateStripeFrame);
-        driver.switchTo().frame(driver.findElement(iframePrivateStripeFrame));
-        waitPresenceOfElementLocated(driver, iframeLightboxApp);
-        driver.switchTo().frame(driver.findElement(iframeLightboxApp));
+    public CheckoutPage switchToFrameConfirmDocuments() {
+        waitPresenceOfElementLocated(iframePrivateStripeFrame);
+        switchToFrame(iframePrivateStripeFrame);
+        waitPresenceOfElementLocated(iframeLightboxApp);
+        switchToFrame(iframeLightboxApp);
         return this;
     }
 
     public CheckoutPage clickAcceptIdentityButton() {
-        waitPresenceOfElementLocated(driver, submitButton);
-        driver.findElement(submitButton).click();
+        waitPresenceOfElementLocated(submitButton);
+        click(submitButton);
         return this;
     }
 
     public CheckoutPage clickContinueButton() {
-        waitPresenceOfElementLocated(driver, continueButton);
-        driver.findElement(continueButton).click();
+        waitPresenceOfElementLocated(continueButton);
+        click(continueButton);
         return this;
     }
 
     public CheckoutPage switchToDefaultContent() {
-        driver.switchTo().defaultContent();
+        switchToDefault();
         return this;
     }
 
     public CheckoutPage clickConfirmAddressButton() {
-        waitPresenceOfElementLocated(driver, confirmAddressButton);
-        driver.findElement(confirmAddressButton).click();
+        waitPresenceOfElementLocated(confirmAddressButton);
+        click(confirmAddressButton);
         return this;
     }
 
     public CheckoutPage inputGrossIncome(String gross) {
-        waitPresenceOfElementLocated(driver, grossIncomeField);
-        driver.findElement(grossIncomeField).sendKeys(gross);
+        waitPresenceOfElementLocated(grossIncomeField);
+        sendKeys(grossIncomeField, gross);
         return this;
     }
 
     public CheckoutPage selectPrivacyPolicyCheckbox() {
-        javascriptExecutorScrollIntoView(driver, privacyPolicyCheckbox);
-        selectCheckbox(driver, privacyPolicyCheckbox);
+        javascriptExecutorScrollIntoView(privacyPolicyCheckbox);
+        selectCheckbox(privacyPolicyCheckbox);
         return this;
     }
 
     public CheckoutPage selectConsumerCheckbox() {
-        selectCheckbox(driver, consumerCheckbox);
+        selectCheckbox(consumerCheckbox);
         return this;
     }
 
     public CheckoutPage selectFairCheckbox() {
-        selectCheckbox(driver, fairCheckbox);
+        selectCheckbox(fairCheckbox);
         return this;
     }
 
 
     public CheckoutPage clickCheckMeButton() {
-        driver.findElement(checkMeButton).click();
+        waitElementToBeClickable(checkMeButton);
+        click(checkMeButton);
         return this;
     }
 
     public CheckoutPage inputInsetance(String text) {
-        waitPresenceOfElementLocated(driver, inputInsuranceField);
-        driver.findElement(inputInsuranceField).sendKeys(text);
+        waitPresenceOfElementLocated(inputInsuranceField);
+        sendKeys(inputInsuranceField, text);
         return this;
     }
 
     public CheckoutPage confirmInsuranceButton() {
-        driver.findElement(confirmInsuranceButton).click();
+        click(confirmInsuranceButton);
         return this;
     }
 
     public CheckoutPage nextStepButton() {
-        waitPresenceOfElementLocated(driver, nextStepButton);
-        driver.findElement(nextStepButton).click();
+        waitPresenceOfElementLocated(nextStepButton);
+        click(nextStepButton);
         return this;
     }
 
     public CheckoutPage selectInsuranceCheckbox() {
-        waitPresenceOfElementLocated(driver, insuranceCheckbox);
-        selectCheckbox(driver, insuranceCheckbox);
+        waitPresenceOfElementLocated(insuranceCheckbox);
+        selectCheckbox(insuranceCheckbox);
 
         return this;
     }
 
     public CheckoutPage switchToFrameCardNumber() {
-        waitPresenceOfElementLocated(driver, selectPaymentFrame);
-        driver.switchTo().frame(driver.findElement(selectPaymentFrame));
+        waitPresenceOfElementLocated(selectPaymentFrame);
+        switchToFrame(selectPaymentFrame);
         return this;
     }
 
     public CheckoutPage inputCardNumber(String text) {
-        javascriptExecutorScrollIntoView(driver, cardNumberField);
-        driver.findElement(cardNumberField).sendKeys(text);
+        javascriptExecutorScrollIntoView(cardNumberField);
+        sendKeys(cardNumberField, text);
         return this;
     }
 
     public CheckoutPage switchToFrameDateExpiry() {
-        waitPresenceOfElementLocated(driver, selectCardNumberFrame);
-        driver.switchTo().frame(driver.findElement(selectCardNumberFrame));
+        waitPresenceOfElementLocated(selectCardNumberFrame);
+        switchToFrame(selectCardNumberFrame);
         return this;
     }
 
     public CheckoutPage inputDateExiry(String text) {
-        driver.findElement(expiryDateField).sendKeys(text);
+        sendKeys(expiryDateField, text);
         return this;
     }
 
     public CheckoutPage switchToFrameCVC() {
-        waitPresenceOfElementLocated(driver, selectCVCFrame);
-        driver.switchTo().frame(driver.findElement(selectCVCFrame));
+        waitPresenceOfElementLocated(selectCVCFrame);
+        switchToFrame(selectCVCFrame);
         return this;
     }
 
     public CheckoutPage inputCVC(String text) {
-        driver.findElement(cvcField).sendKeys(text);
+        sendKeys(cvcField, text);
         return this;
     }
 
     public CheckoutPage selectSubscriptionCheckbox() {
-        selectCheckbox(driver, subscriptionCheckbox);
+        selectCheckbox(subscriptionCheckbox);
         return this;
     }
 
     public CheckoutPage clickSelectHowDidYouHer() {
-        driver.findElement(howDidYouHearAboutUsField).click();
+        click(howDidYouHearAboutUsField);
         return this;
     }
 
     public CheckoutPage clickSelectFacebook() {
-        waitPresenceOfElementLocated(driver, selectFacebook);
-        driver.findElement(selectFacebook).click();
-
+        waitPresenceOfElementLocated(selectFacebook);
+        click(selectFacebook);
         return this;
     }
 
     public CheckoutPage clickSelectLeaseOrPurchase() {
-        driver.findElement(leaseOrPurchaseField).click();
+        click(leaseOrPurchaseField);
         return this;
     }
 
     public CheckoutPage clickSelectLease() {
-        waitPresenceOfElementLocated(driver, selectLease);
-        driver.findElement(selectLease).click();
+        waitPresenceOfElementLocated(selectLease);
+        click(selectLease);
         return this;
     }
 
     public CheckoutPage clickPayButtom() {
-        waitPresenceOfElementLocated(driver, payButton);
-        driver.findElement(payButton).click();
+        waitPresenceOfElementLocated(payButton);
+        click(payButton);
         return this;
     }
 
     public CheckoutPage successfullMessage() {
-        waitPresenceOfElementLocated(driver, successfullMessage);
+        waitPresenceOfElementLocated(successfullMessage);
         return this;
 
     }

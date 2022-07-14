@@ -2,10 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SelectedCarPage extends Settings{
-    WebDriver driver;
+
 
     public SelectedCarPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     final By selectAgeRangeField = By.xpath("//h4[text()='Select age range']");
@@ -14,24 +14,24 @@ public class SelectedCarPage extends Settings{
 
 
     public SelectedCarPage checkPreloaderInvisible() {
-        waitInvisibilityOfElementLocated(driver, preloader);
+        waitInvisibilityOfElementLocated(preloader);
         return this;
     }
 
 
     public SelectedCarPage clickSelectAgeRange() {
-        driver.findElement(selectAgeRangeField).click();
+        click(selectAgeRangeField);
         return this;
     }
 
     public SelectedCarPage clickSelectAge() {
-        waitPresenceOfElementLocated(driver, selectAge);
-        driver.findElement(selectAge).click();
+        waitPresenceOfElementLocated(selectAge);
+        click(selectAge);
         return this;
     }
 
     public CheckoutPage clickApplyCar() {
-        javascriptExecutor(driver, "document.getElementsByClassName('MuiButton-root')[0].click()");
+        javascriptExecutor("document.getElementsByClassName('MuiButton-root')[0].click()");
         return new CheckoutPage(driver);
     }
 }

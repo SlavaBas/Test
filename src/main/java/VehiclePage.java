@@ -2,10 +2,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class VehiclePage extends Settings{
-    WebDriver driver;
+
 
     public VehiclePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
 
@@ -14,14 +14,14 @@ public class VehiclePage extends Settings{
 
 
     public VehiclePage inputZIPCode(String zipcode){
-        waitPresenceOfElementLocated(driver, ZIPCodeField);
-        driver.findElement(ZIPCodeField).sendKeys(zipcode);
+        waitPresenceOfElementLocated(ZIPCodeField);
+        sendKeys(ZIPCodeField, zipcode);
         return this;
     }
 
     public CarByZIPPage clickFindCar(){
-        waitPresenceOfElementLocated(driver, findVehicleButton);
-        driver.findElement(findVehicleButton).click();
+        waitPresenceOfElementLocated(findVehicleButton);
+        click(findVehicleButton);
         return new CarByZIPPage(driver);
     }
 
