@@ -46,7 +46,6 @@ public class CheckoutPage extends Settings {
     final By inputStateField = By.name("state");
     final By inputZIPField = By.xpath("//input[@placeholder='Zipcode']");
     final By uploadResidencyDocuments = By.xpath("//input[contains(@id,'fileUploader-document')]");
-    final By uploadRButton = By.xpath("//div[contains(@class,'upload_wrapper')]//button");
     final By removeUploadedFileButton = By.xpath("//a[contains(@class,'style_remove_button')]");
     final By goToSecondStepButton = By.xpath("//div[contains(@class,'form_submit_box')]//button");
     final By addPersonalInsurance = By.xpath("//h4[text()='add Personal insurance']");
