@@ -135,8 +135,6 @@ public class CheckoutPage extends Settings {
 
     public CheckoutPage selectState(String state) {
         waitPresenceOfElementLocated(inputStateField);
-        String id = getAttribute(inputStateField, "id");
-        javascriptExecutor("document.getElementById('" + id + "').value = '" + state + "'");
         sendKeys(inputStateField, state);
         sendKeysKeyboardInput(inputStateField, Keys.ARROW_DOWN);
         sendKeysKeyboardInput(inputStateField, Keys.ENTER);

@@ -1,4 +1,5 @@
 import com.github.javafaker.Faker;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,11 +27,11 @@ public class WebDriverSettings {
 
     @BeforeClass
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless", "--window-size=1920,1200");
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless", "--window-size=1920,1200");
 
         ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -53,15 +54,15 @@ public class WebDriverSettings {
         settings = new Settings(driver);
 
     }
-
-    @AfterMethod
-    public void close() {
-        driver.close();
-    }
-
-    @AfterClass
-    public void quit() {
-        driver.quit();
-    }
+//
+//    @AfterMethod
+//    public void close() {
+//        driver.close();
+//    }
+//
+//    @AfterClass
+//    public void quit() {
+//        driver.quit();
+//    }
 
 }

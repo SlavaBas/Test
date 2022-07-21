@@ -8,7 +8,7 @@ public class CarByZIPPage extends Settings{
     }
 
     final By locationText = By.xpath("//h4[text()='Location']");
-    final By selectedCar = By.xpath("//a//h4[@title='2022 Nissan  Altima']");
+    final By selectedCar = By.xpath("//a//h4[@title='2022 Nissan  Sentra']");
 
     public CarByZIPPage checkText(){
         waitPresenceOfElementLocated(locationText);

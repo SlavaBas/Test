@@ -11,8 +11,6 @@ public class FirstTest extends WebDriverSettings{
         vehiclePage.inputZIPCode("19044")
                 .clickFindCar();
         carByZIPPage.checkText();
-        String text = driver.findElement(By.xpath("//h4[text()='Location']")).getText();
-        Assert.assertEquals("Location", text);
         carByZIPPage.clickSelectCar();
         selectedCarPage.checkPreloaderInvisible()
                 .clickSelectAgeRange()
@@ -64,8 +62,6 @@ public class FirstTest extends WebDriverSettings{
         vehiclePage.inputZIPCode("33014")
                 .clickFindCar();
         carByZIPPage.checkText();
-        String text = driver.findElement(By.xpath("//h4[text()='Location']")).getText();
-        Assert.assertEquals("Location", text);
         carByZIPPage.clickSelectCar();
         selectedCarPage.checkPreloaderInvisible()
                 .clickSelectAgeRange()
